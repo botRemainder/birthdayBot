@@ -6,9 +6,9 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-sender_email = "check1472@gmail.com"
-receiver_email = "suhravis@cisco.com"
-password = "zigzqxczrrvxwdrt"
+sender_email = "cxxxx"
+receiver_email = "xxxxx"
+password = "xxxxx"
 
 def send_mail(content):
     message = MIMEMultipart("alternative")
@@ -64,7 +64,7 @@ def send_message(message):
     print(message)
 
 if __name__ == "__main__":
-    filepath = '/Users/suhravis/Downloads/RekhaTeamAnniversary.xlsx'
+    filepath = '/path/to/xlsx'
     
     excel_data_df = pd.read_excel(filepath, sheet_name='Form1')
     print(datetime.datetime.now())
