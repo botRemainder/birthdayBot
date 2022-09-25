@@ -5,6 +5,7 @@ import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+<<<<<<< HEAD
 from webexsdksend import WebexSendMsg
 
 from dotenv import load_dotenv
@@ -17,6 +18,11 @@ load_dotenv(dotenv_path=dotenv_path)
 sender_email = os.getenv('SENDER_MAIL')
 receiver_email = os.getenv('RECIEVER_MAIL')
 password = os.getenv('MAIL_PASSWORD')
+=======
+sender_email = "cxxxx"
+receiver_email = "xxxxx"
+password = "xxxxx"
+>>>>>>> fc9612892d195e94d37f35862583221aaf99e072
 
 def send_mail(content):
     message = MIMEMultipart("alternative")
@@ -72,9 +78,14 @@ def send_message(message):
     print(message)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     msg = WebexSendMsg(roomId=os.getenv('WEBEX_ROOM_ID_TO_SEND'))
     #msg.createMsg(message="{0}\U0001F3C6 \U0001F38A \U0001F389".format('some random txt'))
     filepath = os.getenv('MAIL_PASSWORD')
+=======
+    filepath = '/path/to/xlsx'
+    
+>>>>>>> fc9612892d195e94d37f35862583221aaf99e072
     excel_data_df = pd.read_excel(filepath, sheet_name='Form1')
     print(datetime.datetime.now())
     for name,joining_date in zip(excel_data_df['Employee Name'],excel_data_df['Date of Joining of cisco'].astype(str)):
