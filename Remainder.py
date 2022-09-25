@@ -1,14 +1,22 @@
 import pandas as pd
 import datetime
 from num2words import num2words
-
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-sender_email = "check1472@gmail.com"
-receiver_email = "suhravis@cisco.com"
-password = "zigzqxczrrvxwdrt"
+from webexsdksend import WebexSendMsg
+
+from dotenv import load_dotenv
+from pathlib import Path
+import os
+
+dotenv_path = Path('.env')
+load_dotenv(dotenv_path=dotenv_path)
+
+sender_email = os.getenv('SENDER_MAIL')
+receiver_email = os.getenv('RECIEVER_MAIL')
+password = os.getenv('MAIL_PASSWORD')
 
 def send_mail(content):
     message = MIMEMultipart("alternative")
@@ -64,8 +72,9 @@ def send_message(message):
     print(message)
 
 if __name__ == "__main__":
-    filepath = '/Users/suhravis/Downloads/RekhaTeamAnniversary.xlsx'
-    
+    msg = WebexSendMsg(roomId=os.getenv('WEBEX_ROOM_ID_TO_SEND'))
+    #msg.createMsg(message="{0}\U0001F3C6 \U0001F38A \U0001F389".format('some random txt'))
+    filepath = os.getenv('MAIL_PASSWORD')
     excel_data_df = pd.read_excel(filepath, sheet_name='Form1')
     print(datetime.datetime.now())
     for name,joining_date in zip(excel_data_df['Employee Name'],excel_data_df['Date of Joining of cisco'].astype(str)):
@@ -73,8 +82,12 @@ if __name__ == "__main__":
         year = check_work_anniversary(joining_date)
         if year > 0:
             send_mail("Happy {0} work anniversary {1} \U0001F3C6 \U0001F38A \U0001F389".format(num2words(year,to='ordinal'),name))
+            msg = WebexSendMsg(roomId=os.getenv('WEBEX_ROOM_ID_TO_SEND'))
+            msg.createMsg(message="Happy {0} work anniversary {1} \U0001F3C6 \U0001F38A \U0001F389".format(num2words(year,to='ordinal'),name))
 
     for name,birth_date in zip(excel_data_df['Employee Name'],excel_data_df['Birthday in DD-MMM format (eg. 13-Aug)'].astype(str)):
         #print(name,birth_date)
         if check_birthday(birth_date):
             send_mail("Happy Birthday {} \U0001F370 \U0001F389 \U0001F38A".format(name))
+            msg = WebexSendMsg(roomId=os.getenv('WEBEX_ROOM_ID_TO_SEND'))
+            msg.createMsg(message="Happy Birthday {} \U0001F370 \U0001F389 \U0001F38A".format(name))

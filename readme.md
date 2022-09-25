@@ -13,4 +13,4 @@ Schedule Everyday at 8:00 AM for the script Birtday_wish.py
 
 ```
 0 8 * * * python3 /path/to/script/Remainder.py >/tmp/stdout.log 2>/tmp/stderr.log
-```# birthdayBot
+``` 
